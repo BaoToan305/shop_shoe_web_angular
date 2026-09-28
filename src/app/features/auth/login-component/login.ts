@@ -5,21 +5,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { CookieService } from '../../../core/services/common/cookie.service';
-
+import { ToastService } from '../../../core/services/common/toast.service';
+import { RegistComponent } from '../../../features/auth/regist-component/regist-component';
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RegistComponent],
   selector: 'app-login',
   styleUrl: './login.scss',
   templateUrl: './login.html',
 })
 export class Login {
-   private cookieService = inject(CookieService);
-
+  private cookieService = inject(CookieService);
+  private toast = inject(ToastService);
   private readonly TOKEN_KEY = 'access_token';
   private readonly REFRESH_KEY = 'refresh_token';
 
-
+  showRegister = false;
   userName = '';
   passWord = '';
   showPassword = false;
@@ -36,8 +37,9 @@ export class Login {
   }
 
   onSubmit() {
+  
     if (!this.userName || !this.passWord) {
-      this.errorMessage = 'Vui lòng nhập đầy đủ thông tin';
+      this.toast.warning('Vui lòng nhập đầy đủ thông tin');
       return;
     }
 
@@ -51,13 +53,13 @@ export class Login {
             this.cookieService.set(this.REFRESH_KEY, response.data.refreshToken, 7);
           }
         
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         } else {
-          this.errorMessage = response.message || 'Sai tài khoản hoặc mật khẩu';
+          this.toast.error(response.message || 'Sai tài khoản hoặc mật khẩu');
         }
       },
-      error: () => {
-        this.errorMessage = 'Có lỗi xảy ra. Vui lòng thử lại.';
+      error: (error) => {
+        this.toast.error(error?.error?.message);
       }
     });
   }
@@ -69,7 +71,8 @@ export class Login {
 
   onCreateAccount(event: Event) {
     event.preventDefault();
-    this.router.navigate(['/register']);
+    console.log('Tạo tài khoản mới');
+    this.showRegister = true;
   }
 
   loginWithGoogle() {

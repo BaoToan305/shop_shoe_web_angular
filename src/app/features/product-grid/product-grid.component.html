@@ -1,0 +1,17 @@
+<section class="products wrap" id="san-pham">
+  <div class="section-head">
+    <h2>{{ title }}</h2>
+    <span>{{ products.length }} sản phẩm</span>
+  </div>
+
+  <div class="grid">
+    @for (product of products; track product.id) {
+      <app-product-card
+        [product]="product"
+        (addToCart)="addToCart.emit($event)">
+      </app-product-card>
+    } @empty {
+      <p class="empty">Không có sản phẩm nào trong danh mục này.</p>
+    }
+  </div>
+</section>

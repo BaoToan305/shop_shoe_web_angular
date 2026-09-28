@@ -1,0 +1,20 @@
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 40px 0 32px;
+}
+
+.chip {
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.chip.active { background: var(--ink); color: var(--lime); }
+.chip:not(.active):hover { background: rgba(22, 20, 15, 0.06); }

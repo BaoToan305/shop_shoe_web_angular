@@ -1,0 +1,283 @@
+/* Font: thêm vào index.html của Angular
+   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> */
+
+:host {
+  --rp-bg: #f3efe6;
+  --rp-input-bg: #faf8f2;
+  --rp-border: #ddd6c4;
+  --rp-text: #111111;
+  --rp-muted: #8a877e;
+  --rp-lime: #d9ff3d;
+  --rp-red: #e5533d;
+}
+
+/* ===== Overlay (nền mờ + căn giữa màn hình) ===== */
+.rp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(20, 20, 18, 0.55);
+  backdrop-filter: blur(3px);
+
+  /* Trạng thái đóng */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.rp-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.3s ease, visibility 0s;
+}
+
+/* ===== Popup ===== */
+.rp-modal {
+  position: relative;
+  width: 100%;
+  max-width: 414px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 38px 36px 28px;
+  background: var(--rp-bg);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--rp-text);
+
+  /* Animation: trượt lên + phóng to nhẹ */
+  transform: translateY(30px) scale(0.92);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s ease;
+}
+
+.rp-overlay.is-open .rp-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ===== Nút X ===== */
+.rp-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--rp-text);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.rp-close:hover {
+  transform: rotate(90deg);
+}
+
+/* ===== Logo + tiêu đề ===== */
+.rp-logo {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--rp-text);
+  color: var(--rp-lime);
+  font-family: 'Archivo Black', 'Inter', sans-serif;
+  font-size: 18px;
+  text-transform: lowercase;
+}
+
+.rp-title {
+  margin: 22px 0 8px;
+  font-family: 'Archivo Black', 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.rp-desc {
+  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--rp-muted);
+}
+
+/* ===== Form ===== */
+.rp-label {
+  display: block;
+  margin: 16px 5px 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.rp-field input:-webkit-autofill,
+.rp-field input:-webkit-autofill:hover,
+.rp-field input:-webkit-autofill:focus,
+.rp-field input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--rp-text);
+  caret-color: var(--rp-text);
+  box-shadow: none;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.rp-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 16px;
+  background: var(--rp-input-bg);
+  border: 1px solid var(--rp-border);
+  border-radius: 14px;
+  color: #6b685f;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rp-field:focus-within {
+  border-color: var(--rp-text);
+  box-shadow: 0 0 0 3px rgba(217, 255, 61, 0.55);
+}
+
+.rp-field.rp-invalid,
+.rp-field.rp-invalid:focus-within {
+  border-color: #e5533d;
+  box-shadow: 0 0 0 3px rgba(229, 83, 61, 0.2);
+}
+
+.rp-icon {
+  flex-shrink: 0;
+}
+
+.rp-field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--rp-text);
+}
+
+.rp-field input::placeholder {
+  color: #a5a298;
+}
+
+.rp-toggle {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rp-text);
+  cursor: pointer;
+}
+
+/* ===== Nút hành động ===== */
+.rp-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.rp-btn {
+  position: relative;
+  flex: 1;
+  height: 46px;
+  border: 0;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--rp-text);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.rp-btn:active {
+  transform: scale(0.97);
+}
+
+.rp-btn-ghost {
+  background: var(--rp-input-bg);
+  border: 1px solid var(--rp-border);
+  border-radius: 14px;
+}
+
+.rp-btn-ghost:hover {
+  background: #ece7da;
+}
+
+/* Nút Xác nhận: hình bình hành (skew) */
+.rp-btn-primary {
+  flex: 1.3;
+  background: transparent;
+}
+
+.rp-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--rp-lime);
+  border-radius: 12px;
+  transform: skewX(-8deg);
+  transition: filter 0.2s ease;
+  z-index: 0;
+}
+
+.rp-btn-primary:hover::before {
+  filter: brightness(0.94);
+}
+
+.rp-btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Chân popup ===== */
+.rp-secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--rp-muted);
+}
+
+.rp-login {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--rp-muted);
+}
+
+.rp-login a {
+  color: var(--rp-red);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rp-login a:hover {
+  text-decoration: underline;
+}
+
+/* Màn hình nhỏ */
+@media (max-width: 480px) {
+  .rp-modal {
+    padding: 32px 22px 24px;
+  }
+}

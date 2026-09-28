@@ -1,0 +1,25 @@
+<div class="cart-item">
+  <div class="thumb">
+    @if (item.product.imageUrl) {
+      <img [src]="item.product.imageUrl" [alt]="item.product.name" />
+    } @else {
+      <svg viewBox="0 0 140 70" class="shoe-fallback">
+        <path fill="currentColor" d="M6 58 C4 50 6 42 14 38 C22 34 30 36 36 31 C44 25 50 15 64 11 C80 6 96 8 106 18 C112 24 116 30 122 32 C128 34 132 38 132 45 C132 52 128 58 118 58 Z" />
+      </svg>
+    }
+  </div>
+
+  <div class="meta">
+    <div class="name">{{ item.product.name }}</div>
+    <div class="unit">{{ formatVND(item.product.price) }} / đôi</div>
+
+    <div class="qty-row">
+      <button type="button" class="qty-btn" (click)="changeQty(-1)" aria-label="Giảm số lượng">−</button>
+      <span class="qty-val">{{ item.quantity }}</span>
+      <button type="button" class="qty-btn" (click)="changeQty(1)" aria-label="Tăng số lượng">+</button>
+      <button type="button" class="remove-link" (click)="onRemove()">Xoá</button>
+    </div>
+  </div>
+
+  <div class="item-total">{{ formatVND(lineTotal) }}</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="wrap">
+  <div class="filters">
+    <button
+      type="button"
+      class="chip"
+      [class.active]="active() === null"
+      (click)="select(null)">
+      Tất cả
+    </button>
+
+    @for (category of categories; track category.id) {
+      <button
+        type="button"
+        class="chip"
+        [class.active]="category.id === active()"
+        (click)="select(category)">
+        {{ category.name }}
+      </button>
+    }
+  </div>
+</div>

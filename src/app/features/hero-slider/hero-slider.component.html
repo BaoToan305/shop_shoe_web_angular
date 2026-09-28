@@ -1,0 +1,28 @@
+<div class="hero-visual">
+  <div class="slider">
+    <span class="slide-label">{{ label() }}</span>
+
+    <div class="slides" [style.transform]="trackStyle()">
+      @for (image of slideList(); track image; let i = $index) {
+        <div class="slide">
+          <img [src]="image" [alt]="'Ảnh giày ' + (i + 1)" />
+        </div>
+      }
+    </div>
+
+    <button type="button" class="slider-nav prev" (click)="prev()" aria-label="Ảnh trước">‹</button>
+    <button type="button" class="slider-nav next" (click)="next()" aria-label="Ảnh kế tiếp">›</button>
+  </div>
+
+  <div class="slider-dots">
+    @for (image of slideList(); track image; let i = $index) {
+      <button
+        type="button"
+        class="dot"
+        [class.active]="i === current()"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Xem ảnh giày ' + (i + 1)">
+      </button>
+    }
+  </div>
+</div>

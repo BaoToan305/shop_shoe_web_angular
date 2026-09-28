@@ -1,0 +1,29 @@
+<div class="card">
+  @if (product.imageUrl) {
+    <span class="badge-real">HÀNG THẬT</span>
+  }
+
+  <div class="card-visual">
+    @if (product.imageUrl) {
+      <img [src]="product.imageUrl" [alt]="product.name" />
+    } @else {
+      <svg viewBox="0 0 140 70" class="shoe-fallback">
+        <path fill="currentColor" d="M6 58 C4 50 6 42 14 38 C22 34 30 36 36 31 C44 25 50 15 64 11 C80 6 96 8 106 18 C112 24 116 30 122 32 C128 34 132 38 132 45 C132 52 128 58 118 58 Z" />
+        <path stroke="var(--cream-card)" stroke-width="2" fill="none" opacity="0.6" d="M40 30 L48 40 M52 25 L60 37 M64 20 L72 34" />
+        <path stroke="var(--cream-card)" stroke-width="2" fill="none" opacity="0.4" d="M14 50 H124" />
+      </svg>
+    }
+  </div>
+
+  <h3>{{ product.name }}</h3>
+  <div class="card-bottom">
+    <span class="price">{{ formatVND(product.price) }}</span>
+    <button
+      type="button"
+      class="add-btn"
+      [class.added]="justAdded()"
+      (click)="onAdd()">
+      {{ justAdded() ? 'Đã thêm ✓' : 'Thêm vào giỏ' }}
+    </button>
+  </div>
+</div>

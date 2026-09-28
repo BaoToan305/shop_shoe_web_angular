@@ -1,0 +1,10 @@
+<section class="info-strip" id="thong-tin">
+  <div class="wrap info-grid">
+    @for (item of items; track item.title) {
+      <div class="info-item">
+        <h4>{{ item.title }}</h4>
+        <p>{{ item.description }}</p>
+      </div>
+    }
+  </div>
+</section>

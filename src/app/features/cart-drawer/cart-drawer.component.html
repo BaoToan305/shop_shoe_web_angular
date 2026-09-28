@@ -1,0 +1,41 @@
+<div class="overlay" [class.open]="isOpen()" (click)="close()"></div>
+
+<aside class="drawer" [class.open]="isOpen()">
+  <div class="drawer-head">
+    <h3>Giỏ hàng của bạn</h3>
+    <button type="button" class="close-btn" (click)="close()" aria-label="Đóng giỏ hàng">×</button>
+  </div>
+
+  <div class="drawer-body">
+    @if (isEmpty()) {
+      <div class="empty-cart">
+        <svg viewBox="0 0 48 48">
+          <path fill="none" stroke="currentColor" stroke-width="2" d="M6 12h4l4 22h22l4-16H16" />
+          <circle cx="18" cy="40" r="2.5" fill="currentColor" />
+          <circle cx="34" cy="40" r="2.5" fill="currentColor" />
+        </svg>
+        Giỏ hàng đang trống.<br />Chọn một vài đôi giày để bắt đầu nhé.
+      </div>
+    } @else {
+      @for (item of items(); track item.product.id) {
+        <app-cart-item
+          [item]="item"
+          (quantityChange)="onQuantityChange($event)"
+          (remove)="onRemove($event)">
+        </app-cart-item>
+      }
+    }
+  </div>
+
+  <div class="drawer-foot">
+    @if (!isEmpty()) {
+      <div class="subtotal-row">
+        <span>Tạm tính</span>
+        <span>{{ formatVND(subtotal()) }}</span>
+      </div>
+    }
+    <button type="button" class="checkout-btn" [disabled]="isEmpty()" (click)="checkout()">
+      Thanh toán
+    </button>
+  </div>
+</aside>

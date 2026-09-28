@@ -1,0 +1,28 @@
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>BƯỚC ĐI<br /><span class="accent">KHÁC BIỆT</span></h1>
+
+      <p class="lead">
+        Từ phối màu kinh điển đến bản giới hạn mới nhất — chọn đúng đôi cho từng
+        bước chân, giao hàng toàn quốc trong 48 giờ.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#san-pham" class="skew-btn on-dark"><span>Xem sản phẩm</span></a>
+        <a href="#thong-tin" class="skew-btn skew-outline"><span>Chính sách đổi trả</span></a>
+      </div>
+
+      <div class="stats-row">
+        @for (stat of stats; track stat.value) {
+          <div class="stat">
+            <b>{{ stat.value }}</b>
+            <span>{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <app-hero-slider [slides]="slides"></app-hero-slider>
+  </div>
+</section>

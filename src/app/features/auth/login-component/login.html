@@ -30,7 +30,7 @@
       <h1>Chào bạn quay lại</h1>
       <p class="lead">Đăng nhập vào tài khoản Stride của bạn để tiếp tục mua sắm.</p>
 
-      <form (ngSubmit)="onSubmit()" novalidate>
+      <form novalidate>
         <div class="field">
           <label for="username">Tài khoản</label>
           <div class="input-row">
@@ -55,7 +55,7 @@
           <a href="#" (click)="onForgotPassword($event)">Quên mật khẩu?</a>
         </div>
 
-        <button type="submit" class="btn-primary">
+        <button type="submit" class="btn-primary" (click)="onSubmit()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           Đăng nhập
         </button>
@@ -79,7 +79,9 @@
         </button>
       </div>
 
-      <p class="footer-link">Chưa có tài khoản? <a href="#" (click)="onCreateAccount($event)">Tạo tài khoản mới</a></p>
+      <p class="footer-link">Chưa có tài khoản?  <a href="#" (click)="onCreateAccount($event)" style="cursor: pointer;">Tạo tài khoản mới</a>
+      <app-regist-component [isOpen]="showRegister"
+                            (closed)="showRegister = false"></app-regist-component></p>
     </div>
   </div>
 

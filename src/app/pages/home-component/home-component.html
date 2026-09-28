@@ -1,0 +1,13 @@
+<app-hero [slides]="slides()"></app-hero>
+
+<app-filters
+  [categories]="categories()"
+  (categoryChange)="onCategoryChange($event)">
+</app-filters>
+
+<app-product-grid
+  [products]="filteredProducts()"
+  (addToCart)="onAddToCart($event)">
+</app-product-grid>
+
+<app-info-strip></app-info-strip>
